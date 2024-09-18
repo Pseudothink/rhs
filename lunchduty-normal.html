@@ -2,6 +2,300 @@
 <html>
 <head>
 <style>
+/* THEMES */
+
+/********** Theme: dark **********/
+/* Font styles */
+.flipdown.flipdown__theme-dark {
+  font-family: sans-serif;
+  font-weight: bold;
+}
+/* Rotor group headings */
+.flipdown.flipdown__theme-dark .rotor-group-heading:before {
+  color: #000000;
+}
+/* Delimeters */
+.flipdown.flipdown__theme-dark .rotor-group:nth-child(n+1):nth-child(-n+2):before,
+.flipdown.flipdown__theme-dark .rotor-group:nth-child(n+1):nth-child(-n+2):after {
+  background-color: #151515;
+}
+/* Rotor tops */
+.flipdown.flipdown__theme-dark .rotor,
+.flipdown.flipdown__theme-dark .rotor-top,
+.flipdown.flipdown__theme-dark .rotor-leaf-front {
+  color: #FFFFFF;
+  background-color: #151515;
+}
+/* Rotor bottoms */
+.flipdown.flipdown__theme-dark .rotor-bottom,
+.flipdown.flipdown__theme-dark .rotor-leaf-rear {
+  color: #EFEFEF;
+  background-color: #202020;
+}
+/* Hinge */
+.flipdown.flipdown__theme-dark .rotor:after {
+  border-top: solid 1px #151515;
+}
+
+/********** Theme: light **********/
+/* Font styles */
+.flipdown.flipdown__theme-light {
+  font-family: sans-serif;
+  font-weight: bold;
+}
+/* Rotor group headings */
+.flipdown.flipdown__theme-light .rotor-group-heading:before {
+  color: #EEEEEE;
+}
+/* Delimeters */
+.flipdown.flipdown__theme-light .rotor-group:nth-child(n+1):nth-child(-n+2):before,
+.flipdown.flipdown__theme-light .rotor-group:nth-child(n+1):nth-child(-n+2):after {
+  background-color: #DDDDDD;
+}
+/* Rotor tops */
+.flipdown.flipdown__theme-light .rotor,
+.flipdown.flipdown__theme-light .rotor-top,
+.flipdown.flipdown__theme-light .rotor-leaf-front {
+  color: #222222;
+  background-color: #DDDDDD;
+}
+/* Rotor bottoms */
+.flipdown.flipdown__theme-light .rotor-bottom,
+.flipdown.flipdown__theme-light .rotor-leaf-rear {
+  color: #333333;
+  background-color: #EEEEEE;
+}
+/* Hinge */
+.flipdown.flipdown__theme-light .rotor:after {
+  border-top: solid 1px #222222;
+}
+
+/* END OF THEMES */
+
+/* https://stackoverflow.com/questions/1232096/how-to-horizontally-center-a-floating-element-of-a-variable-width */
+#centerwrap {
+    float: left;
+    position: relative;
+    left: 50%;
+}
+
+#floatedcontent {
+    float: left;
+    position: relative;
+    left: -50%;
+}
+
+.flipdown {
+  text-align: center;
+  overflow: visible;
+  width: 100%; /* 510px;*/
+  height: 20%; /* 110px; */
+}
+
+.flipdown .rotor-group {
+  position: relative;
+  float: left;
+  padding-right: 30px;
+}
+
+.flipdown .rotor-group:last-child {
+  padding-right: 0;
+}
+
+.flipdown .rotor-group-heading:before {
+  display: block;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+}
+
+.flipdown .rotor-group:nth-child(1) .rotor-group-heading:before {
+  content: attr(data-before);
+}
+
+.flipdown .rotor-group:nth-child(2) .rotor-group-heading:before {
+  content: attr(data-before);
+}
+
+.flipdown .rotor-group:nth-child(3) .rotor-group-heading:before {
+  content: attr(data-before);
+}
+
+.flipdown .rotor-group:nth-child(n+1):nth-child(-n+2):before {
+  content: '';
+  position: absolute;
+  bottom: 45px;
+  left: 215px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.flipdown .rotor-group:nth-child(n+1):nth-child(-n+2):after {
+  content: '';
+  position: absolute;
+  bottom: 90px;
+  left: 215px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.flipdown .rotor {
+  position: relative;
+  float: left;
+  width: 100px;
+  height: 160px;
+  margin: 0px 10px 0px 0px;
+  border-radius: 8px;
+  font-size: 8rem;
+  text-align: center;
+  perspective: 400px;
+}
+
+.flipdown .rotor:last-child {
+  margin-right: 0;
+}
+
+.flipdown .rotor-top,
+.flipdown .rotor-bottom {
+  overflow: hidden;
+  position: absolute;
+  width: 100px;
+  height: 80px;
+}
+
+.flipdown .rotor-leaf {
+  z-index: 1;
+  position: absolute;
+  width: 100px;
+  height: 160px;
+  transform-style: preserve-3d;
+  transition: transform 0s;
+}
+
+.flipdown .rotor-leaf.flipped {
+  transform: rotateX(-180deg);
+  transition: all 0.5s ease-in-out;
+}
+
+.flipdown .rotor-leaf-front,
+.flipdown .rotor-leaf-rear {
+  overflow: hidden;
+  position: absolute;
+  width: 100px;
+  height: 80px;
+  margin: 0;
+  transform: rotateX(0deg);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.flipdown .rotor-leaf-front {
+  line-height: 160px;
+  border-radius: 8px 8px 0px 0px;
+}
+
+.flipdown .rotor-leaf-rear {
+  line-height: 0px;
+  border-radius: 0px 0px 8px 8px;
+  transform: rotateX(-180deg);
+}
+
+.flipdown .rotor-top {
+  line-height: 160px;
+  border-radius: 8px 8px 0px 0px;
+}
+
+.flipdown .rotor-bottom {
+  bottom: 0;
+  line-height: 0px;
+  border-radius: 0px 0px 8px 8px;
+}
+
+.flipdown .rotor:after {
+  content: '';
+  z-index: 2;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 100px;
+  height: 80px;
+  border-radius: 0px 0px 8px 8px;
+}
+
+@media (max-width: 550px) {
+
+  .flipdown {
+    width: 510px; /* 312px; */
+    height: 110px; /* 70px; */
+  }
+
+  .flipdown .rotor {
+    font-size: 2.2rem;
+    margin-right: 6px;
+  }
+
+  .flipdown .rotor,
+  .flipdown .rotor-leaf,
+  .flipdown .rotor-leaf-front,
+  .flipdown .rotor-leaf-rear,
+  .flipdown .rotor-top,
+  .flipdown .rotor-bottom,
+  .flipdown .rotor:after {
+    width: 60px;
+  }
+
+  .flipdown .rotor-group {
+    padding-right: 40px;
+  }
+
+  .flipdown .rotor-group:last-child {
+    padding-right: 0px;
+  }
+
+  .flipdown .rotor-group-heading:before {
+    font-size: 1.6rem;
+    height: 40px;
+    line-height: 40px;
+  }
+
+  .flipdown .rotor-group:nth-child(n+1):nth-child(-n+2):before,
+  .flipdown .rotor-group:nth-child(n+1):nth-child(-n+2):after {
+    left: 69px;
+  }
+
+  .flipdown .rotor-group:nth-child(n+1):nth-child(-n+2):before {
+    bottom: 13px;
+    height: 16px;
+    width: 16px;
+  }
+
+  .flipdown .rotor-group:nth-child(n+1):nth-child(-n+2):after {
+    bottom: 29px;
+    height: 16px;
+    width: 16px;
+  }
+
+  .flipdown .rotor-leaf-front,
+  .flipdown .rotor-top {
+    line-height: 100px;
+  }
+
+  .flipdown .rotor-leaf,
+  .flipdown .rotor {
+    height: 100px;
+  }
+
+  .flipdown .rotor-leaf-front,
+  .flipdown .rotor-leaf-rear,
+  .flipdown .rotor-top,
+  .flipdown .rotor-bottom,
+  .flipdown .rotor:after {
+    height: 50px;
+  }
+}
+
 html {
   height: 100%;
 }
@@ -9,9 +303,9 @@ html {
 body {
   margin: 0px;
   height: 100%;
-  display: flex;
+  /* display: flex; */
   align-items: center;
-  align-content: space-around;
+  align-content: center;
 }
 
 body,
@@ -45,11 +339,28 @@ body.light-theme .buttons .button:hover {
 
 .example {
   font-family: 'Roboto', sans-serif;
-  width: 550px;
-  height: 378px;
+  width: 90%; /* 550px; */
+  height: 20%; /* 378px; */
   margin: auto;
-  padding: 20px;
+  padding: 40px;
   box-sizing: border-box;
+  text-align: center;
+}
+
+.example .message1 {
+  text-align: center;
+  font-weight: 400;
+  font-size: 8em;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.example .message2 {
+  text-align: center;
+  font-weight: 400;
+  font-size: 3em;
+  margin-top: 0;
+  margin-bottom: 20px;
 }
 
 .example .flipdown {
@@ -59,9 +370,9 @@ body.light-theme .buttons .button:hover {
 .example h1 {
   text-align: center;
   font-weight: 100;
-  font-size: 3em;
+  font-size: 6em;
   margin-top: 0;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .example p {
@@ -116,11 +427,11 @@ body.light-theme .buttons .button:hover {
 @media(max-width: 550px) {
   .example {
     width: 100%;
-    height: 362px;
+    height: 20%; /* 362px; */
   }
 
   .example h1 {
-    font-size: 2.5em;
+    font-size: 5em;
   }
 
   .example p {
@@ -152,13 +463,543 @@ body.light-theme .buttons .button:hover {
 </head>
 <body>
 <script>
+
+/**
+ * @name FlipDown
+ * @description Flip styled countdown clock
+ * @author Peter Butcher (PButcher) <pbutcher93[at]gmail[dot]com>
+ * @param {number} uts - Time to count down to as unix timestamp
+ * @param {string} el - DOM element to attach FlipDown to
+ * @param {object} opt - Optional configuration settings
+ **/
+class FlipDown {
+  constructor(uts, el = "flipdown", opt = {}) {
+    // If uts is not specified
+    if (typeof uts !== "number") {
+      throw new Error(
+        `FlipDown: Constructor expected unix timestamp, got ${typeof uts} instead.`
+      );
+    }
+
+    // If opt is specified, but not el
+    if (typeof el === "object") {
+      opt = el;
+      el = "flipdown";
+    }
+
+    // FlipDown version
+    this.version = "0.3.2";
+
+    // Initialised?
+    this.initialised = false;
+
+    // Time at instantiation in seconds
+    this.now = this._getTime();
+
+    // UTS to count down to
+    this.epoch = uts;
+
+    // UTS passed to FlipDown is in the past
+    this.countdownEnded = false;
+
+    // User defined callback for countdown end
+    this.hasEndedCallback = null;
+
+    // FlipDown DOM element
+    this.element = document.getElementById(el);
+
+    // Rotor DOM elements
+    this.rotors = [];
+    this.rotorLeafFront = [];
+    this.rotorLeafRear = [];
+    this.rotorTops = [];
+    this.rotorBottoms = [];
+
+    // Interval
+    this.countdown = null;
+
+    // Number of days remaining
+    //this.daysRemaining = 0;
+
+    // Clock values as numbers
+    this.clockValues = {};
+
+    // Clock values as strings
+    this.clockStrings = {};
+
+    // Clock values as array
+    this.clockValuesAsString = [];
+    this.prevClockValuesAsString = [];
+
+    // Parse options
+    this.opts = this._parseOptions(opt);
+
+    // Set options
+    this._setOptions();
+
+    // Print Version
+    console.log(`FlipDown ${this.version} (Theme: ${this.opts.theme})`);
+  }
+
+  /**
+   * @name start
+   * @description Start the countdown
+   * @author PButcher
+   **/
+  start() {
+    // Initialise the clock
+    if (!this.initialised) this._init();
+
+    // Set up the countdown interval
+    this.countdown = setInterval(this._tick.bind(this), 1000);
+
+    // Chainable
+    return this;
+  }
+
+  /**
+   * @name ifEnded
+   * @description Call a function once the countdown ends
+   * @author PButcher
+   * @param {function} cb - Callback
+   **/
+  ifEnded(cb) {
+    this.hasEndedCallback = function () {
+      cb();
+      this.hasEndedCallback = null;
+    };
+
+    // Chainable
+    return this;
+  }
+
+  /**
+   * @name _getTime
+   * @description Get the time in seconds (unix timestamp)
+   * @author PButcher
+   **/
+  _getTime() {
+    return new Date().getTime() / 1000;
+  }
+
+  /**
+   * @name _hasCountdownEnded
+   * @description Has the countdown ended?
+   * @author PButcher
+   **/
+  _hasCountdownEnded() {
+    // Countdown has ended
+    if (this.epoch - this.now < 0) {
+      this.countdownEnded = true;
+
+      // Fire the ifEnded callback once if it was set
+      if (this.hasEndedCallback != null) {
+        // Call ifEnded callback
+        this.hasEndedCallback();
+
+        // Remove the callback
+        this.hasEndedCallback = null;
+      }
+
+      return true;
+
+      // Countdown has not ended
+    } else {
+      this.countdownEnded = false;
+      return false;
+    }
+  }
+
+  /**
+   * @name _parseOptions
+   * @description Parse any passed options
+   * @param {object} opt - Optional configuration settings
+   * @author PButcher
+   **/
+  _parseOptions(opt) {
+    //let headings = ["Days", "Hours", "Minutes", "Seconds"];
+    let headings = ["Hours", "Minutes", "Seconds"];
+    //if (opt.headings && opt.headings.length === 4) {
+    if (opt.headings && opt.headings.length === 3) {
+      headings = opt.headings;
+    }
+    return {
+      // Theme
+      theme: opt.hasOwnProperty("theme") ? opt.theme : "dark",
+      headings,
+    };
+  }
+
+  /**
+   * @name _setOptions
+   * @description Set optional configuration settings
+   * @author PButcher
+   **/
+  _setOptions() {
+    // Apply theme
+    this.element.classList.add(`flipdown__theme-${this.opts.theme}`);
+  }
+
+  /**
+   * @name _init
+   * @description Initialise the countdown
+   * @author PButcher
+   **/
+  _init() {
+    this.initialised = true;
+
+    // Check whether countdown has ended and calculate how many digits the day counter needs
+	/*
+    if (this._hasCountdownEnded()) {
+      this.daysremaining = 0;
+    } else {
+      this.daysremaining = Math.floor(
+        (this.epoch - this.now) / 86400
+      ).toString().length;
+    }
+    var dayRotorCount = this.daysremaining <= 2 ? 2 : this.daysremaining;
+*/
+    // Create and store rotors
+    //for (var i = 0; i < dayRotorCount + 6; i++) {
+    for (var i = 0; i < 6; i++) {
+      this.rotors.push(this._createRotor(0));
+    }
+
+    // Create day rotor group
+	/*
+    var dayRotors = [];
+    for (var i = 0; i < dayRotorCount; i++) {
+      dayRotors.push(this.rotors[i]);
+    }
+    this.element.appendChild(this._createRotorGroup(dayRotors, 0));
+*/
+    // Create other rotor groups
+    //var count = dayRotorCount;
+    var count = 0;
+    for (var i = 0; i < 3; i++) {
+      var otherRotors = [];
+      for (var j = 0; j < 2; j++) {
+        otherRotors.push(this.rotors[count]);
+        count++;
+      }
+      //this.element.appendChild(this._createRotorGroup(otherRotors, i + 1));
+      this.element.appendChild(this._createRotorGroup(otherRotors, i));
+    }
+
+    // Store and convert rotor nodelists to arrays
+    this.rotorLeafFront = Array.prototype.slice.call(
+      this.element.getElementsByClassName("rotor-leaf-front")
+    );
+    this.rotorLeafRear = Array.prototype.slice.call(
+      this.element.getElementsByClassName("rotor-leaf-rear")
+    );
+    this.rotorTop = Array.prototype.slice.call(
+      this.element.getElementsByClassName("rotor-top")
+    );
+    this.rotorBottom = Array.prototype.slice.call(
+      this.element.getElementsByClassName("rotor-bottom")
+    );
+
+    // Set initial values;
+    this._tick();
+    this._updateClockValues(true);
+
+    return this;
+  }
+
+  /**
+   * @name _createRotorGroup
+   * @description Add rotors to the DOM
+   * @author PButcher
+   * @param {array} rotors - A set of rotors
+   **/
+  _createRotorGroup(rotors, rotorIndex) {
+    var rotorGroup = document.createElement("div");
+    rotorGroup.className = "rotor-group";
+    var dayRotorGroupHeading = document.createElement("div");
+    dayRotorGroupHeading.className = "rotor-group-heading";
+    dayRotorGroupHeading.setAttribute(
+      "data-before",
+      this.opts.headings[rotorIndex]
+    );
+    rotorGroup.appendChild(dayRotorGroupHeading);
+    appendChildren(rotorGroup, rotors);
+    return rotorGroup;
+  }
+
+  /**
+   * @name _createRotor
+   * @description Create a rotor DOM element
+   * @author PButcher
+   * @param {number} v - Initial rotor value
+   **/
+  _createRotor(v = 0) {
+    var rotor = document.createElement("div");
+    var rotorLeaf = document.createElement("div");
+    var rotorLeafRear = document.createElement("figure");
+    var rotorLeafFront = document.createElement("figure");
+    var rotorTop = document.createElement("div");
+    var rotorBottom = document.createElement("div");
+    rotor.className = "rotor";
+    rotorLeaf.className = "rotor-leaf";
+    rotorLeafRear.className = "rotor-leaf-rear";
+    rotorLeafFront.className = "rotor-leaf-front";
+    rotorTop.className = "rotor-top";
+    rotorBottom.className = "rotor-bottom";
+    rotorLeafRear.textContent = v;
+    rotorTop.textContent = v;
+    rotorBottom.textContent = v;
+    appendChildren(rotor, [rotorLeaf, rotorTop, rotorBottom]);
+    appendChildren(rotorLeaf, [rotorLeafRear, rotorLeafFront]);
+    return rotor;
+  }
+
+  /**
+   * @name _tick
+   * @description Calculate current tick
+   * @author PButcher
+   **/
+  _tick() {
+    // Get time now
+    this.now = this._getTime();
+
+    // Between now and epoch
+    var diff = this.epoch - this.now <= 0 ? 0 : this.epoch - this.now;
+
+    // Days remaining
+    this.clockValues.d = Math.floor(diff / 86400);
+    diff -= this.clockValues.d * 86400;
+
+    // Hours remaining
+    this.clockValues.h = Math.floor(diff / 3600);
+    diff -= this.clockValues.h * 3600;
+
+    // Minutes remaining
+    this.clockValues.m = Math.floor(diff / 60);
+    diff -= this.clockValues.m * 60;
+
+    // Seconds remaining
+    this.clockValues.s = Math.floor(diff);
+
+    // Update clock values
+    this._updateClockValues();
+
+    // Has the countdown ended?
+    this._hasCountdownEnded();
+  }
+
+  /**
+   * @name _updateClockValues
+   * @description Update the clock face values
+   * @author PButcher
+   * @param {boolean} init - True if calling for initialisation
+   **/
+  _updateClockValues(init = false) {
+    // Build clock value strings
+    //this.clockStrings.d = pad(this.clockValues.d, 2);
+    this.clockStrings.h = pad(this.clockValues.h, 2);
+    this.clockStrings.m = pad(this.clockValues.m, 2);
+    this.clockStrings.s = pad(this.clockValues.s, 2);
+
+    // Concat clock value strings
+    this.clockValuesAsString = (
+      //this.clockStrings.d +
+      this.clockStrings.h +
+      this.clockStrings.m +
+      this.clockStrings.s
+    ).split("");
+
+    // Update rotor values
+    // Note that the faces which are initially visible are:
+    // - rotorLeafFront (top half of current rotor)
+    // - rotorBottom (bottom half of current rotor)
+    // Note that the faces which are initially hidden are:
+    // - rotorTop (top half of next rotor)
+    // - rotorLeafRear (bottom half of next rotor)
+    this.rotorLeafFront.forEach((el, i) => {
+      el.textContent = this.prevClockValuesAsString[i];
+    });
+
+    this.rotorBottom.forEach((el, i) => {
+      el.textContent = this.prevClockValuesAsString[i];
+    });
+
+    function rotorTopFlip() {
+      this.rotorTop.forEach((el, i) => {
+        if (el.textContent != this.clockValuesAsString[i]) {
+          el.textContent = this.clockValuesAsString[i];
+        }
+      });
+    }
+
+    function rotorLeafRearFlip() {
+      this.rotorLeafRear.forEach((el, i) => {
+        if (el.textContent != this.clockValuesAsString[i]) {
+          el.textContent = this.clockValuesAsString[i];
+          el.parentElement.classList.add("flipped");
+          var flip = setInterval(
+            function () {
+              el.parentElement.classList.remove("flipped");
+              clearInterval(flip);
+            }.bind(this),
+            500
+          );
+        }
+      });
+    }
+
+    // Init
+    if (!init) {
+      setTimeout(rotorTopFlip.bind(this), 500);
+      setTimeout(rotorLeafRearFlip.bind(this), 500);
+    } else {
+      rotorTopFlip.call(this);
+      rotorLeafRearFlip.call(this);
+    }
+
+    // Save a copy of clock values for next tick
+    this.prevClockValuesAsString = this.clockValuesAsString;
+  }
+}
+
+/**
+ * @name pad
+ * @description Prefix a number with zeroes
+ * @author PButcher
+ * @param {string} n - Number to pad
+ * @param {number} len - Desired length of number
+ **/
+function pad(n, len) {
+  n = n.toString();
+  return n.length < len ? pad("0" + n, len) : n;
+}
+
+/**
+ * @name appendChildren
+ * @description Add multiple children to an element
+ * @author PButcher
+ * @param {object} parent - Parent
+ **/
+function appendChildren(parent, children) {
+  children.forEach((el) => {
+    parent.appendChild(el);
+  });
+}
+
+
+  // TIMED_MESSAGE item format:
+  /* 
+  [
+  Start Time HH, 
+  Start Time MM, 
+  Start Time SS, 
+  End Time HH, 
+  End Time MM, 
+  End Time SS, 
+  Large Message, 
+  Large Message Second Language, 
+  Small Message, 
+  Small Message Second Language
+  ]
+  */
+  const TIMED_MESSAGES = [
+ 	[0,0,0,9,15,0,"You May Pass", "Puedes Pasar", "Period 1 begins at 9:15am", "El período 1 comienza a las 9:15am"],
+ 	[9,15,0,10,35,0,"Pass Required","Te Requieres Pase", "Period 1 ends at 9:15am", "El período 1 termina a las 9:15am"],
+ 	[10,35,0,10,40,0,"You May Pass", "Puedes Pasar", "Period 2 begins at 10:40am", "El período 2 comienza a las 10:40am"],
+ 	[10,40,0,12,0,0,"Pass Required","Te Requieres Pase", "Period 2 ends at 12:00pm", "El período 2 termina a las 12:00pm"],
+ 	[12,0,0,12,5,0,"You May Pass","Puedes Pasar","Lunch A Transition - No Pass Required","El almuerzo A transición - No te requieres pase"],
+	[12,5,0,12,40,0,"Pass Required","Te Requieres Pase","Lunch A ends at 12:45pm","El almuerzo A termina a las 12:45pm"],
+	[12,40,0,12,45,0,"You May Pass","Puedes Pasar","Lunch B Transition - No Pass Required","El almuerzo B transición - No te requieres pase"],
+	[12,45,0,13,25,0,"Pass Required","Te Requieres Pase","Lunch B ends at 1:25pm","El almuerzo B termina a las 1:25pm"],
+ 	[13,25,0,13,30,0,"You May Pass", "Puedes Pasar", "Period 3 begins at 1:30pm", "El período 3 comienza a las 1:30pm"],
+ 	[13,30,0,14,50,0,"Pass Required","Te Requieres Pase", "Period 3 ends at 2:50pm", "El período 3 termina a las 2:50pm"],
+ 	[14,50,0,14,55,0,"You May Pass", "Puedes Pasar", "Period 4 begins at 2:55pm", "El período 4 comienza a las 2:55pm"],
+ 	[14,55,0,16,15,0,"Pass Required","Te Requieres Pase", "Period 4 ends at 4:15pm", "El período 4 termina a las 4:15pm"],
+ 	[16,15,0,23,59,59,"You May Pass","Puedes Pasar", "Go forth and make it a great evening.", "Adelante y haz que sea una gran velada."]
+  ];
+
+// Example: 1726161900.669 = timer ends at 1:25pm on 9/12/2024.
+function GetTimerEnd(altLanguage) {
+	let dateNow = new Date();
+	let dateStart = new Date();
+	let dateEnd = new Date();
+	
+	for (let i = 0; i < TIMED_MESSAGES.length; i++) {
+		dateStart.setHours(TIMED_MESSAGES[i][0]);
+		dateStart.setMinutes(TIMED_MESSAGES[i][1]);
+		dateStart.setSeconds(TIMED_MESSAGES[i][2]);
+		dateEnd.setHours(TIMED_MESSAGES[i][3]);
+		dateEnd.setMinutes(TIMED_MESSAGES[i][4]);
+		dateEnd.setSeconds(TIMED_MESSAGES[i][5]);
+		
+		if (dateStart <= dateNow && dateNow < dateEnd) {
+			//let timerSeconds = ((dateEnd.getTime() - dateNow.getTime()) / 1000;
+			let timerEnd = dateEnd.getTime() / 1000;
+			//console.log("Timer set for " + timerStart);
+			
+			
+			var msg1 = document.getElementById('message1');
+			var msg2 = document.getElementById('message2');
+			if (altLanguage) {
+				msg1.innerHTML = TIMED_MESSAGES[i][7];
+				msg2.innerHTML = TIMED_MESSAGES[i][9];
+			} else {
+				msg1.innerHTML = TIMED_MESSAGES[i][6];
+				msg2.innerHTML = TIMED_MESSAGES[i][8];
+			}
+  
+			return timerEnd;
+		}
+	}
+	
+	return new Date().getTime / 1000 + 60;
+}
+
+/*
+function UpdateFlipDown() {
+	let dateNow = new Date();
+	let dateStart = new Date();
+	let dateEnd = new Date();
+	
+	for (let i = 0; i < TIMED_MESSAGES.length; i++) {
+		dateStart.setHours(TIMED_MESSAGES[i][0]);
+		dateStart.setMinutes(TIMED_MESSAGES[i][1]);
+		dateStart.setSeconds(TIMED_MESSAGES[i][2]);
+		dateEnd.setHours(TIMED_MESSAGES[i][3]);
+		dateEnd.setMinutes(TIMED_MESSAGES[i][4]);
+		dateEnd.setSeconds(TIMED_MESSAGES[i][5]);
+		
+		if (dateStart <= dateNow && dateNow < dateEnd) {
+			let timerSeconds = (dateEnd.getTime() - dateNow.getTime()) / 1000;
+			flipdown = new FlipDown(timerSeconds)
+			.start()
+			
+			// Do something when the countdown ends
+			.ifEnded(() => {
+			  console.log('The countdown has ended!');
+			  //UpdateFlipDown();
+			});
+		}
+	}
+}*/
+// file:///C:/Users/rpatr/Documents/Ryan/Riverside/Projects/Github/lunchduty-normal.html
+
 document.addEventListener('DOMContentLoaded', () => {
-
+  
   // Unix timestamp (in seconds) to count down to
-  var twoDaysFromNow = (new Date().getTime() / 1000) + (86400 * 2) + 1;
-
+  //var twoDaysFromNow = (new Date().getTime() / 1000) + (86400 * 2) + 1;
+  //var fiveSecondsFromNow = (new Date().getTime() / 1000) + 5;
+  
+  //var twoDaysFromNow = (new Date().getTime() / 1000) + (86400 * 2) + 1;
+ 
+  //var timerSeconds = (new Date().getTime() / 1000) + (86400 * 2) + 1;
+  var altLang = false;
+  var timerEnd = GetTimerEnd();
+  console.log("Timer set to " + timerEnd);
+  
   // Set up FlipDown
-  var flipdown = new FlipDown(twoDaysFromNow)
+  //var flipdown = new FlipDown(twoDaysFromNow)
+  var flipdown = new FlipDown(timerEnd)
 
     // Start the countdown
     .start()
@@ -169,24 +1010,31 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
   // Toggle theme
+  /*
   var interval = setInterval(() => {
     let body = document.body;
     body.classList.toggle('light-theme');
     body.querySelector('#flipdown').classList.toggle('flipdown__theme-dark');
     body.querySelector('#flipdown').classList.toggle('flipdown__theme-light');
   }, 5000);
-  
+  */
+  /*
   var ver = document.getElementById('ver');
-  ver.innerHTML = flipdown.version;
+  ver.innerHTML = flipdown.version;*/
+  
+  var interval = setInterval(() => {
+	altLang = !altLang;
+    GetTimerEnd(altLang);
+  }, 5000);
 });
 </script>
+
 <div class="example">
-  <h1>FlipDown.js</h1>
-  <p>⏰ A lightweight and performant flip styled countdown clock</p>
-  <div id="flipdown" class="flipdown"></div>
+  <div id="message1" class="message1"></div>
+  <div id="message2" class="message2"></div>
+  <div id="centerwrap"><div id="floatedcontent"><div id="flipdown" class="flipdown"></div></div></div>
   <div class="buttons">
-    <p>Version: <span id="ver"></span> (&lt;11KB minified)</p>
-    <a href="https://github.com/PButcher/flipdown#flipdown" target="_blank" class="button"><i class="fab fa-github"></i> <span>Get started</span></a>
+    <p><span id="ver"></span></p>
   </div>
 </div>
 
