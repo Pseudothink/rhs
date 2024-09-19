@@ -718,6 +718,7 @@ class FlipDown {
     rotorGroup.className = "rotor-group";
     var dayRotorGroupHeading = document.createElement("div");
     dayRotorGroupHeading.className = "rotor-group-heading";
+    //dayRotorGroupHeading.id = "rotor-group-heading" + rotorIndex;
     dayRotorGroupHeading.setAttribute(
       "data-before",
       this.opts.headings[rotorIndex]
@@ -923,6 +924,9 @@ function GetTimerEnd(altLanguage) {
 	let dateNow = new Date();
 	let dateStart = new Date();
 	let dateEnd = new Date();
+    let headings = ["Hours", "Minutes", "Seconds"];
+	let headingsAlt = ["Horas", "Minutos", "Segundos"];
+	
 	
 	for (let i = 0; i < TIMED_MESSAGES.length; i++) {
 		dateStart.setHours(TIMED_MESSAGES[i][0]);
@@ -940,12 +944,21 @@ function GetTimerEnd(altLanguage) {
 			
 			var msg1 = document.getElementById('message1');
 			var msg2 = document.getElementById('message2');
+			//var heading0 = document.getElementById('rotor-group-heading0');
+			//var heading1 = document.getElementById('rotor-group-heading1');
+			//var heading2 = document.getElementById('rotor-group-heading2');
 			if (altLanguage) {
 				msg1.innerHTML = TIMED_MESSAGES[i][7];
 				msg2.innerHTML = TIMED_MESSAGES[i][9];
+				//heading0.setAttribute("data-before", headingsAlt[0]);
+				//heading1.setAttribute("data-before", headingsAlt[1]);
+				//heading2.setAttribute("data-before", headingsAlt[2]);
 			} else {
 				msg1.innerHTML = TIMED_MESSAGES[i][6];
 				msg2.innerHTML = TIMED_MESSAGES[i][8];
+				//heading0.setAttribute("data-before", headings[0]);
+				//heading1.setAttribute("data-before", headings[1]);
+				//heading2.setAttribute("data-before", headings[2]);
 			}
   
 			return timerEnd;
@@ -999,8 +1012,10 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Set up FlipDown
   //var flipdown = new FlipDown(twoDaysFromNow)
+  //var flipdown = new FlipDown(timerEnd)
+  
   var flipdown = new FlipDown(timerEnd)
-
+  
     // Start the countdown
     .start()
 
