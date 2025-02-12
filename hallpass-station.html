@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+/* https://stackoverflow.com/questions/1232096/how-to-horizontally-center-a-floating-element-of-a-variable-width */
+.centerwrap {
+    float: left;
+    position: relative;
+    left: 50%;
+}
+
+.floatedcontent {
+    float: left;
+    position: relative;
+    left: -50%;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0px;
+  height: 100%;
+  align-items: center;
+  align-content: center;
+}
+
+body.light-theme {
+  background-color: #151515;
+}
+
+.example {
+  font-family: serif;
+  width: 90%; /* 550px; */
+  height: 20%; /* 378px; */
+  margin: auto;
+  padding: 40px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.example .message1 {
+  font-family: serif;
+  text-align: center;
+  font-weight: 400;
+  font-size: 9em;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.example .message2 {
+  font-family: serif;
+  text-align: left;
+  font-weight: 400;
+  font-size: 4em;
+  margin-top: 0;
+  margin-left: 1em;
+  margin-bottom: 20px;
+}
+
+ol {
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+}
+
+ol li {
+  margin-left: 2em;
+}
+
+@media(max-width: 550px) {
+  .example {
+    width: 100%;
+    height: 20%; /* 362px; */
+  }
+}
+
+#lang2 {
+	display: none;
+}
+
+</style>
+</head>
+<body>
+ 
+<div id="lang1" class="example">
+  <div class="message1">Hall Pass Station</div>
+  <div class="message2">
+  <div class="centerwrap"><div class="floatedcontent"><div style="display: inline-block">You can:
+  <ol><li>Stop and present your hall pass.</li>
+  <li>Stop without a hall pass.<br/>(Warning/Conference)</li>
+  <li>Keep walking.<br/>(Office Referral/Lunch Detention)</li></ol>
+  </div></div></div></div>
+</div>
+
+<div id="lang2" class="example">
+  <div class="message1">Hall Pass Station</div>
+  <div class="message2">
+  <div class="centerwrap"><div class="floatedcontent"><div style="display: inline-block">You can:
+  <ol><li>Stop and present your hall pass.</li>
+  <li>Stop without a hall pass.<br/>(Warning/Conference)</li>
+  <li>Keep walking.<br/>(Office Referral/Lunch Detention)</li></ol>
+  </div></div></div></div>
+</div>
+
+ <script>
+	const l1 = document.getElementById('lang1');
+	const l2 = document.getElementById('lang2');
+	 
+	function toggleMessage() {
+	  if (l1.style.display == 'none') {
+		l1.style.display = 'block';
+		l2.style.display = 'none';
+	  } else {
+		l1.style.display = 'none';
+		l2.style.display = 'block';
+	  }
+	}
+ 
+    setInterval(toggleMessage, 5000);
+ </script>
+ 
+</body>
+</html>
