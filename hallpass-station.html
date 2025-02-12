@@ -79,6 +79,16 @@ ol li {
 	display: none;
 }
 
+.highlight1 {
+	color: darkgreen;
+}
+.highlight2 {
+	color: #BA8E23;
+}
+.highlight3 {
+	color: darkred;
+}
+
 </style>
 </head>
 <body>
@@ -87,19 +97,19 @@ ol li {
   <div class="message1">Hall Pass Station</div>
   <div class="message2">
   <div class="centerwrap"><div class="floatedcontent"><div style="display: inline-block">You can:
-  <ol><li>Stop and present your hall pass.</li>
-  <li>Stop without a hall pass.<br/>(Warning/Conference)</li>
-  <li>Continue walking.<br/>(Office Referral/Lunch Detention)</li></ol>
+  <ol><li><span class="highlight1">Stop and present your pass.</span></li>
+  <li><span class="highlight2">Stop without a pass: warning/conference.</span></li>
+  <li><span class="highlight3">Continue walking: office referral/lunch detention.</span></li></ol>
   </div></div></div></div>
 </div>
 
 <div id="lang2" class="example">
   <div class="message1">Estaci&oacute;n de Pases de Pasillo</div>
   <div class="message2">
-  <div class="centerwrap"><div class="floatedcontent"><div style="display: inline-block">Puede:
-  <ol><li>Usted detiene con pase de pasillo.</li>
-  <li>Usted detiene sin pase de pasillo.<br />(Advertencia/Conferencia)</li>
-  <li>Sigue caminando. (Remisi&oacute;n a la oficina/Detenci&oacute;n durante el almuerzo)</li></ol>
+  <div class="centerwrap"><div class="floatedcontent"><div style="display: inline-block">Usted puede:
+  <ol><li><span class="highlight1">Parar y mostrar su pase.</span></li>
+  <li><span class="highlight2">Parar sin pase: advertencia/conferencia.</span></li>
+  <li><span class="highlight3">Siguir caminando: detención durante el almuerzo.</span></li></ol>
   </div></div></div></div>
 </div>
 
@@ -117,7 +127,7 @@ ol li {
 	  }
 	}
  
-    setInterval(toggleMessage, 5000);
+    setInterval(toggleMessage, 7000);
  </script>
  
 </body>
